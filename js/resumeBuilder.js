@@ -7,7 +7,7 @@ var bio = {
 		"twitter": "@mohitbio",
 		"location": "Bronx, NY, USA"
 	},
-	"picture": "images/mypic.jpg",
+	"biopic": "images/mypic.jpg",
 	"welcomeMessage": "I'm currently working as a Sr. UI Developer in American Express, NYC.",
 	"skills": ["HTML5", "CSS", "JavaScript", "ReactJS", "AngularJS", "Test Driven Development"]
 };
@@ -18,7 +18,7 @@ var work = {
 			"employer": "American Express",
 			"title": "Senior UI Developer",
 			"location": "Amex Tower NYC, US",
-			"datesWorked": "April 2016 - Present",
+			"dates": "April 2016 - Present",
 			"description": "Curently working on A/B Testing on americanexpress.com across all markets."+
 			"We build different UI variants to test with different sets of users to bring best User Experience."
 		},
@@ -26,7 +26,7 @@ var work = {
 			"employer": "Barclays",
 			"title": "Senior UI Developer",
 			"location": "Whippany, NJ, US",
-			"datesWorked": "Oct 2015 - April 2016",
+			"dates": "Oct 2015 - April 2016",
 			"description": "Worked here on the Compliance Application called The Central Compliance Banker (cBanker)"+
 			" which enables Barclays to meet regulatory and compliance requirements. Identified as a requirement during"+
 			" the Central Compliance Strategic Review (CCSR) in 2015, the system improves agility, reduces manual processes,"+
@@ -36,7 +36,7 @@ var work = {
 			"employer": "Independence Blue Cross",
 			"title": "UI Developer",
 			"location": "Philadelphia, PA, US",
-			"datesWorked": "Jan 2014 – Sep 2015",
+			"dates": "Jan 2014 – Sep 2015",
 			"description": " Work here on the application (ibx.com) which allows the policy holder to see the details about the plan"+
 			" they are enrolled to, what all claims have been made by the applicant and status of the claims. The policy holder can see"+
 			" admiration kit which allows them to make changes to their current policy, know more about healthcare reform, pharmacy services etc."
@@ -45,7 +45,7 @@ var work = {
 			"employer": "Plymouth Rock Assurance Corporation",
 			"title": "UI Developer",
 			"location": "Red Bank, NJ, US",
-			"datesWorked": "Sep 2012 – Oct 2013",
+			"dates": "Sep 2012 – Oct 2013",
 			"description": "Plymouth Rock Assurance is one of the largest insurance groups in New Jersey. The system offers different kind of insurance"+
 			" such as Auto insurance, home insurance, Motorcycle insurance and provides customers with free insurance quotes. Each customer can get their"+
 			" insurance quotes from the application and create an online account to manage their insurance, such as paying bills, make claims, and contacting"+
@@ -57,41 +57,41 @@ var work = {
 var education = {
 	"schools": [
 		{ "name": "New Jersey Institute Of Technology",
-			"datesAttended": "2010-2011",
+			"dates": "2010-2011",
 			"location": "Newark, NJ, US",
 			"degree": "MS",
-			"major": "Bioinformatics",
+			"majors": "Bioinformatics",
 			"url": "https://www.njit.edu/"
 		},
 		{ "name": "Stratford University",
-			"datesAttended": "2011-2012",
+			"dates": "2011-2012",
 			"location": "Falls Church, VA, US",
 			"degree": "MS",
-			"major": "Computer Science",
+			"majors": "Computer Science",
 			"url": "https://www.stratford.edu"
 		},
 		{ "name": "Dr DY Patil University",
-      "datesAttended": "2004-2008",
+      "dates": "2004-2008",
       "location": "Pune, MH, India",
       "degree": "B.Tech",
-      "major": "Bioinformatics",
+      "majors": "Bioinformatics",
       "url": "http://www.biotech.dpu.edu.in/"
     }
 	],
 	"onlineCourses": [
 		{ "school": "Udacity",
 			"title": "Object-Oriented Javascript",
-			"completed": "2014",
+			"dates": "2014",
 			"url": "https://www.udacity.com/course/ud015"
 		},
 		{ "school": "Udacity",
 			"title": "HTML5 Canvas",
-			"completed": "2014",
+			"dates": "2014",
 			"url": "https://www.udacity.com/course/ud292"
 		},
 		{ "school": "Udacity",
 			"title": "Web Development",
-			"completed": "2014",
+			"dates": "2014",
 			"url": "https://www.udacity.com/course/cs253"
 		}
 	]
@@ -101,7 +101,7 @@ var projects = {
 	"projects": [
 		{
 			"title": "Online Portfolio",
-			"datesWorked": "October 2015",
+			"dates": "October 2015",
 			"description": "Created an online portfolio of work as part of Udacity's Front-End Web Developer " +
 			"Nanodegree.",
 			"images": ["images/portfolio.png"],
@@ -113,7 +113,7 @@ var projects = {
 
 var nameFormatted = HTMLheaderName.replace("%data%", bio.name);
 var roleFormatted = HTMLheaderRole.replace("%data%", bio.role);
-var bioPicFormatted = HTMLbioPic.replace("%data%", bio.picture);
+var bioPicFormatted = HTMLbioPic.replace("%data%", bio.biopic);
 var welcomeMsgFormatted = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
 
 var contactInfoFormatted = [];
@@ -122,37 +122,37 @@ contactInfoFormatted.push(HTMLgithub.replace("%data%", bio.contacts.github));
 contactInfoFormatted.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
 contactInfoFormatted.push(HTMLlocation.replace("%data%", bio.contacts.location));
 
-
-$("#header").prepend(roleFormatted);
 $("#header").prepend(nameFormatted);
+$("#header").prepend(roleFormatted);
 $("#header").append(bioPicFormatted);
 $("#header").append(welcomeMsgFormatted);
 
-if(bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
+bio.display = function() {
+    if (bio.skills.length > 0) {
+        $("#header").append(HTMLskillsStart);
 
-	for(var i in bio.skills) {
-		$("#skills").append(HTMLskills.replace("%data%", bio.skills[i]));
-	}
+        for (var i = 0; i < bio.skills.length; i++) {
+            var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+            $("#skills").append(formattedSkills);
+        }
+    }
+};
+
+bio.display();
+
+for (var i = 0; i < contactInfoFormatted.length; i++) {
+    $("#topContacts").append(contactInfoFormatted[i]);
+    $("#footerContacts").append(contactInfoFormatted[i]);
 }
 
-for(var i in contactInfoFormatted) {
-	$("#topContacts").append(contactInfoFormatted[i]);
-	$("#footerContacts").append(contactInfoFormatted[i]);
-}
-
-
-function showWork() {
-
+work.display = function() {
 	if(work.jobs.length > 0) {
-
 		$("#workExperience").append(HTMLworkStart);
-
-		for(var i in work.jobs) {
+		for(var i = 0; i < work.jobs.length; i++) {
 			var employerFormatted = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
 			var workTitleFormatted = HTMLworkTitle.replace("%data%", work.jobs[i].title);
 			var workLocationFormatted = HTMLworkLocation.replace("%data%", work.jobs[i].location);
-			var datesWorkedFormatted = HTMLworkDates.replace("%data%", work.jobs[i].datesWorked);
+			var datesWorkedFormatted = HTMLworkDates.replace("%data%", work.jobs[i].dates);
 			var workDescFormatted = HTMLworkDescription.replace("%data%", work.jobs[i].description);
 
 			var employerworkTitleFormatted = employerFormatted + workTitleFormatted;
@@ -164,18 +164,17 @@ function showWork() {
 		}
 
 	}
+};
 
-}
-
-showWork();
+work.display();
 
 projects.display = function() {
 	if(projects.projects.length > 0) {
-		for(var i in projects.projects) {
+		for(var i = 0; i < projects.projects.length; i++) {
 			$("#projects").append(HTMLprojectStart);
 
 			var projectTitleFormatted = HTMLprojectTitle.replace("%data%", projects.projects[i].title).replace("#", projects.projects[i].url);
-			var projectDatedFormatted = HTMLprojectDates.replace("%data%", projects.projects[i].datesWorked);
+			var projectDatedFormatted = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
 			var projectDescFormatted = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
 
 			$(".project-entry:last").append(projectTitleFormatted);
@@ -196,14 +195,14 @@ projects.display();
 
 education.display = function() {
 	if(education.schools.length > 0 || education.onlineCourses.length > 0) {
-		for(var i in education.schools) {
+		for(var i = 0; i < education.schools.length; i++) {
 			$("#education").append(HTMLschoolStart);
 
 			var schoolNameFormatted = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].url);
 			var schoolDegFormatted = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
-			var schoolDatesFormatted = HTMLschoolDates.replace("%data%", education.schools[i].datesAttended);
+			var schoolDatesFormatted = HTMLschoolDates.replace("%data%", education.schools[i].dates);
 			var schoolLocFormatted = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-			var schoolMajorFormatted = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+			var schoolMajorFormatted = HTMLschoolMajor.replace("%data%", education.schools[i].majors);
 
 			$(".education-entry:last").append(schoolNameFormatted + schoolDegFormatted);
 			$(".education-entry:last").append(schoolDatesFormatted);
@@ -213,11 +212,11 @@ education.display = function() {
 
 		if(education.onlineCourses.length > 0) {
 			$("#education").append(HTMLonlineClasses);
-			for(var i in education.onlineCourses) {
+			for(var i = 0; i < education.onlineCourses.length; i++) {
 				$("#education").append(HTMLschoolStart);
 				var onlineTitleFormatted = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title).replace("#", education.onlineCourses[i].url);
 				var onlineSchoolFormatted = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
-				var onlineDatesFormatted = HTMLonlineDates.replace("%data%", education.onlineCourses[i].completed);
+				var onlineDatesFormatted = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
 				var onlineURLFormatted = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url).replace("#", education.onlineCourses[i].url);
 
 				$(".education-entry:last").append(onlineTitleFormatted + onlineSchoolFormatted);
